@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ონლაინ მაღაზია</title>
+  </head>
+  <body>
+  <div id="container">
+	<h1>ონლაინ მაღაზია</h1>
+	<div id="products">
+	</div>
+	<h3>კალათა</h3>
+	<div id="cart">
+	</div>
+  </div>
+  <script>
+  // პროდუქტების მასივი
+  var products = [
+	["კომპიუტერი", 1900],
+	["ლეპტოპი", 2500],
+	["პლანშეტი", 150],
+	["მობილური ტელეფონი", 900],
+	["კომპიუტერული ნაწილები", 100]
+  ];
+
+  // პროდუქტების მშობელი ობიექტი
+  var productsObj = document.getElementById("products");
+
+  // ყველა პროდუქტის ობიექტის ჩამატება მშობელ ობიექტში
+  for (var i = 0; i < products.length; i++) {
+	var productId = i;
+	var product = products[productId];
+	var productName = product[0];
+	var productPrice = product[1];
+
+	var productObj = '';
+	productObj += '<div id="product-' + productId + '">';
+	productObj += '    <span id="name-' + productId + '">' + productName + '</span>';
+	productObj += '    <span id="price-' + productId + '">' + productPrice + '</span>';
+	productObj += '    <input type="number" id="quantity-' + productId + '" value="1" min="1">';
+	productObj += '    <button id="id-' + productId + '" onclick="addcart(' + productId + ')">კალათაში დამატება</button>';
+	productObj += '</div>';
+
+	productsObj.innerHTML += productObj;
+  }
+
+  // კალათაში დამატების ფუნქცია
+  function addcart(productID) {
+	var productPrice = document.getElementById("price-" + productID).innerHTML;
+	var productQuantity = document.getElementById("quantity-" + productID).value;
+
+	document.getElementById("cart").innerHTML += "<p>" + productPrice * productQuantity + "</p>";
+  }
+  </script>
+  </body>
+</html>

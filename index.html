@@ -12,6 +12,9 @@
 	<h3>კალათა</h3>
 	<div id="cart">
 	</div>
+	<h3>დაანგარიშებული თანხა</h3>
+	<div id="total">
+	</div>
   </div>
   <script>
   // პროდუქტების მასივი
@@ -37,7 +40,6 @@
 	productObj += '<div id="product-' + productId + '">';
 	productObj += '    <span id="name-' + productId + '">' + productName + '</span>';
 	productObj += '    <span id="price-' + productId + '">' + productPrice + '</span>';
-	productObj += '    <input type="number" id="quantity-' + productId + '" value="1" min="1">';
 	productObj += '    <button id="id-' + productId + '" onclick="addcart(' + productId + ')">კალათაში დამატება</button>';
 	productObj += '</div>';
 
@@ -46,10 +48,36 @@
 
   // კალათაში დამატების ფუნქცია
   function addcart(productID) {
+	var productName = document.getElementById("name-" + productID).innerHTML;
 	var productPrice = document.getElementById("price-" + productID).innerHTML;
-	var productQuantity = document.getElementById("quantity-" + productID).value;
+	var cartObj = document.getElementById("cart");
 
-	document.getElementById("cart").innerHTML += "<p>" + productPrice * productQuantity + "</p>";
+	if (!document.getElementById("cart-product-" + productID)) {
+		var productObj = '';
+		productObj += '<div id="cart-product-' + productID + '">';
+		productObj += '    <span id="cart-name-' + productID + '">' + productName + '</span>';
+		productObj += '    <span id="cart-price-' + productID + '">' + productPrice + '</span>';
+		productObj += '    <input type="number" id="cart-quantity-' + productID + '" value="1" min="1" onchange="cartCalculate(' + productID + ')">';
+		productObj += '    <span id="cart-total-' + productID + '">' + productPrice + '</span>';
+		productObj += '    <button id="cart-id-' + productID + '" onclick="removecart(' + productID + ')">კალათიდან ამოშლა</button>';
+		productObj += '</div>';
+
+		cartObj.innerHTML += productObj;
+	}
+  }
+
+  // კალათიდან ამოშლის ფუნქცია
+  function removecart(productID) {
+	document.getElementById('cart-product-' + productID).outerHTML = '';
+  }
+
+  // კალათაში დაანგარიშების ფუნქცია
+  function cartCalculate(productID) {
+	var productPrice = document.getElementById('cart-price-' + productID).innerHTML;
+	var productQuantity = document.getElementById('cart-quantity-' + productID).value;
+	var productTotal = productPrice * productQuantity;
+
+	document.getElementById('cart-total-' + productID).innerHTML = productTotal;
   }
   </script>
   </body>

@@ -109,11 +109,13 @@
 
   // კალათიდან ამოშლის ფუნქცია
   function removecart(productID) {
-	var productTotal = document.getElementById('cart-total-' + productID).innerHTML;
-	total = total - +productTotal;
-	updateTotal();
+	if (confirm('ნამდვილად გსურთ კალათიდან წაშლა ?')) {
+		var productTotal = document.getElementById('cart-total-' + productID).innerHTML;
+		total = total - +productTotal;
+		updateTotal();
 
-	document.getElementById('cart-product-' + productID).outerHTML = '';
+		document.getElementById('cart-product-' + productID).outerHTML = '';
+	}
   }
 
   // კალათაში დაანგარიშების ფუნქცია

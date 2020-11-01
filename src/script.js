@@ -1,5 +1,5 @@
 // პროდუქტების მასივი
-var products = [
+const products = [
     ["კომპიუტერი", 1900],
     ["ლეპტოპი", 2500],
     ["პლანშეტი", 150],
@@ -7,19 +7,19 @@ var products = [
     ["კომპიუტერული ნაწილები", 100]
 ];
 
-var total = 0;
+let total = 0;
 
 // პროდუქტების მშობელი ობიექტი
-var productsObj = document.getElementById("productstlist");
+const productsObj = document.getElementById("productstlist");
 
 // ყველა პროდუქტის ობიექტის ჩამატება მშობელ ობიექტში
-for (var i = 0; i < products.length; i++) {
-    var productId = i;
-    var product = products[productId];
-    var productName = product[0];
-    var productPrice = product[1];
+for (let i = 0; i < products.length; i++) {
+    let productId = i;
+    let product = products[productId];
+    let productName = product[0];
+    let productPrice = product[1];
 
-    var productObj = '';
+    let productObj = '';
     productObj += '<tr id="product-' + productId + '">';
     productObj += '    <td><span id="id-' + productId + '">' + (productId + 1) + '</span></td>';
     productObj += '    <td><span id="name-' + productId + '">' + productName + '</span></td>';
@@ -32,12 +32,12 @@ for (var i = 0; i < products.length; i++) {
 
 // კალათაში დამატების ფუნქცია
 function addcart(productID) {
-    var productName = document.getElementById("name-" + productID).innerHTML;
-    var productPrice = document.getElementById("price-" + productID).innerHTML;
-    var cartObj = document.getElementById("cartlist");
+    const productName = document.getElementById("name-" + productID).innerHTML;
+    const productPrice = document.getElementById("price-" + productID).innerHTML;
+    const cartObj = document.getElementById("cartlist");
 
     if (!document.getElementById("cart-product-" + productID)) {
-        var productObj = '';
+        let productObj = '';
         productObj += '<tr id="cart-product-' + productID + '">';
         productObj += '    <td><span id="cart-ID-' + productID + '">' + (productID + 1) + '</span></td>';
         productObj += '    <td><span id="cart-name-' + productID + '">' + productName + '</span></td>';
@@ -59,7 +59,7 @@ function addcart(productID) {
 // კალათიდან ამოშლის ფუნქცია
 function removecart(productID) {
     if (confirm('ნამდვილად გსურთ კალათიდან წაშლა ?')) {
-        var productTotal = document.getElementById('cart-total-' + productID).innerHTML;
+        const productTotal = document.getElementById('cart-total-' + productID).innerHTML;
         total = total - +productTotal;
         updateTotal();
 
@@ -69,18 +69,18 @@ function removecart(productID) {
 
 // კალათაში დაანგარიშების ფუნქცია
 function cartCalculate(input, productID) {
-    var productPrice = document.getElementById('cart-price-' + productID).innerHTML;
-    var productQuantity = document.getElementById('cart-quantity-' + productID).value;
-    var productTotal = productPrice * productQuantity;
+    const productPrice = document.getElementById('cart-price-' + productID).innerHTML;
+    const productQuantity = document.getElementById('cart-quantity-' + productID).value;
+    let productTotal = productPrice * productQuantity;
 
     document.getElementById('cart-total-' + productID).innerHTML = productTotal;
 
-    var oldPrice = +input.oldvalue * +productPrice;
+    let oldPrice = +input.oldvalue * +productPrice;
     console.log('old price: ' + oldPrice);
     console.log('old price val: ');
     console.log(input.oldvalue);
 
-    var newPrice = +input.value * +productPrice;
+    let newPrice = +input.value * +productPrice;
     console.log('new price: ' + newPrice);
     console.log('new price val: ');
     console.log(input.value);
